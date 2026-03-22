@@ -1,0 +1,20 @@
+Section 301 Tariffs — Market Impact Analysis
+
+On July 6, 2018, the United States imposed 25% tariffs on $34 billion worth of Chinese imports 
+under Section 301 of the Trade Act of 1974. This marked the beginning of the US-China trade war.
+
+Market Impact:
+- EUR/USD dropped from 1.1690 to 1.1550 in the week following the announcement, a 1.2% decline, 
+  as investors fled to USD safe-haven assets.
+- The S&P 500 fell 0.86% on the announcement day but recovered within 3 trading sessions.
+- VIX spiked from 15.2 to 18.4 (21% increase) reflecting heightened uncertainty.
+- GARCH(1,1) volatility persistence for EUR/USD increased from 0.965 to 0.985 post-announcement,
+  indicating a prolonged regime shift in FX volatility.
+
+Subsequent escalations:
+- September 24, 2018: Additional 10% tariffs on $200 billion of Chinese goods.
+- May 10, 2019: Tariff rate increased to 25% on the same $200 billion tranche.
+- Each escalation correlated with ADTV spikes in SPY and QQQ of 40-60% above trailing 20-day average.
+
+The Section 301 tariffs represent a structural shift in global trade policy that permanently 
+altered correlation structures between FX pairs and equity indices.
