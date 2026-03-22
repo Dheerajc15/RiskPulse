@@ -1,0 +1,33 @@
+# Data
+yfinance
+fredapi
+pandas
+numpy
+dask[dataframe]
+boto3
+
+# Time Series / Risk
+arch
+prophet
+scipy
+
+# API
+fastapi
+uvicorn[standard]
+pydantic
+
+# RAG
+chromadb
+sentence-transformers
+langchain
+langchain-community
+openai
+
+# Notebooks
+jupyter
+matplotlib
+seaborn
+ipykernel
+
+# Testing
+pytest
