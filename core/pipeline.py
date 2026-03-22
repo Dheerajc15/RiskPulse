@@ -74,18 +74,32 @@ class MarketDataPipeline:
             progress=False,
         )
 
-        # Handle single vs multiple tickers
-        if len(self.tickers) == 1:
-            yahoo_data.columns = pd.MultiIndex.from_product(
-                [yahoo_data.columns, self.tickers]
-            )
-
-        # Flatten: create columns like 'AAPL_Close', 'AAPL_Volume', etc.
+        # Handle column structure based on number of tickers
         frames = []
-        for ticker in self.tickers:
-            ticker_df = yahoo_data.xs(ticker, level=1, axis=1).copy()
-            ticker_df.columns = [f"{ticker}_{col}" for col in ticker_df.columns]
-            frames.append(ticker_df)
+
+        if len(self.tickers) == 1:
+            ticker = self.tickers[0]
+            # Single ticker: yfinance may return flat columns like 'Close', 'Volume'
+            # OR MultiIndex columns like ('Close', 'UBER')
+            if isinstance(yahoo_data.columns, pd.MultiIndex):
+                # Flatten MultiIndex
+                temp = yahoo_data.droplevel(1, axis=1) if yahoo_data.columns.nlevels > 1 else yahoo_data
+                temp.columns = [f"{ticker}_{col}" for col in temp.columns]
+            else:
+                temp = yahoo_data.copy()
+                temp.columns = [f"{ticker}_{col}" for col in temp.columns]
+            frames.append(temp)
+        else:
+            # Multiple tickers: yfinance returns MultiIndex ('Close', 'UBER'), ('Close', 'SPY')
+            for ticker in self.tickers:
+                try:
+                    ticker_df = yahoo_data.xs(ticker, level=1, axis=1).copy()
+                except KeyError:
+                    # Try level 0
+                    ticker_df = yahoo_data[[col for col in yahoo_data.columns if ticker in str(col)]].copy()
+                    ticker_df.columns = [col[0] if isinstance(col, tuple) else col for col in ticker_df.columns]
+                ticker_df.columns = [f"{ticker}_{col}" for col in ticker_df.columns]
+                frames.append(ticker_df)
 
         combined = pd.concat(frames, axis=1)
 
@@ -106,7 +120,7 @@ class MarketDataPipeline:
 
         self.raw_data = combined.copy()
         logger.info(f"Ingestion complete: {combined.shape[0]} rows, {combined.shape[1]} columns")
-        return self
+        return self    
 
     def validate(self, z_threshold: float = 3.0) -> "MarketDataPipeline":
         """
