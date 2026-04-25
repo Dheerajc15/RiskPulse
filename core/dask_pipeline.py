@@ -34,7 +34,6 @@ class DaskMarketDataPipeline:
         if self.ddf is None:
             raise ValueError("No data. Call .ingest() first.")
 
-        # This triggers a computation (necessary for reporting)
         null_counts = self.ddf.isnull().sum().compute()
         logger.info(f"Dask validation — null counts:\n{null_counts}")
         return self
@@ -52,10 +51,7 @@ class DaskMarketDataPipeline:
         return self
 
     def compute(self) -> pd.DataFrame:
-        """
-        Materialize the Dask DataFrame into a Pandas DataFrame.
-        This is the trigger — all lazy operations execute here.
-        """
+        
         if self.ddf is None:
             raise ValueError("No data. Call .ingest() first.")
 
@@ -65,7 +61,6 @@ class DaskMarketDataPipeline:
         elapsed = time.time() - start
         logger.info(f"Dask compute complete in {elapsed:.2f}s — shape: {self.clean_data.shape}")
 
-        # Post-compute interpolation (not available lazily in Dask)
         self.clean_data = self.clean_data.interpolate(method="linear")
         self.clean_data = self.clean_data.bfill()
         return self.clean_data

@@ -27,18 +27,6 @@ class MarketDataPipeline:
     """
     Handles end-to-end market data ingestion, validation, and cleaning.
     
-    Parameters
-    ----------
-    tickers : list of str
-        Stock/ETF tickers to pull from Yahoo Finance.
-    start_date : str
-        Start date in 'YYYY-MM-DD' format.
-    end_date : str
-        End date in 'YYYY-MM-DD' format.
-    fred_api_key : str, optional
-        API key for FRED data. Get one free at https://fred.stlouisfed.org/docs/api/api_key.html
-    fred_series : list of str, optional
-        FRED series IDs to pull (e.g., ['DGS10', 'DEXUSEU', 'VIXCLS']).
     """
 
     def __init__(
@@ -60,7 +48,7 @@ class MarketDataPipeline:
 
     def ingest(self) -> "MarketDataPipeline":
         """
-        Pull market data from Yahoo Finance and optionally from FRED.
+        Pull market data from Yahoo Finance and FRED.
         Returns self for method chaining.
         """
         logger.info(f"Ingesting data for {self.tickers} from {self.start_date} to {self.end_date}")
@@ -79,8 +67,7 @@ class MarketDataPipeline:
 
         if len(self.tickers) == 1:
             ticker = self.tickers[0]
-            # Single ticker: yfinance may return flat columns like 'Close', 'Volume'
-            # OR MultiIndex columns like ('Close', 'UBER')
+            
             if isinstance(yahoo_data.columns, pd.MultiIndex):
                 # Flatten MultiIndex
                 temp = yahoo_data.droplevel(1, axis=1) if yahoo_data.columns.nlevels > 1 else yahoo_data
@@ -90,12 +77,10 @@ class MarketDataPipeline:
                 temp.columns = [f"{ticker}_{col}" for col in temp.columns]
             frames.append(temp)
         else:
-            # Multiple tickers: yfinance returns MultiIndex ('Close', 'UBER'), ('Close', 'SPY')
             for ticker in self.tickers:
                 try:
                     ticker_df = yahoo_data.xs(ticker, level=1, axis=1).copy()
                 except KeyError:
-                    # Try level 0
                     ticker_df = yahoo_data[[col for col in yahoo_data.columns if ticker in str(col)]].copy()
                     ticker_df.columns = [col[0] if isinstance(col, tuple) else col for col in ticker_df.columns]
                 ticker_df.columns = [f"{ticker}_{col}" for col in ticker_df.columns]

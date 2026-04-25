@@ -13,7 +13,6 @@ from typing import Optional
 import sys
 import os
 
-# Ensure the project root is in the path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from core.pipeline import MarketDataPipeline, RiskEngine
@@ -136,9 +135,6 @@ def get_adtv(
     """
     Average Daily Trading Volume with liquidity flag.
     
-    ADTV is the exact metric JPMC automates for liquidity monitoring.
-    Flags 'low_liquidity' if current ADTV < 25th percentile of historical.
-    
     **Example:** GET /adtv/UBER?window=20
     """
     engine = _build_engine(ticker.upper(), start, end)
@@ -168,12 +164,10 @@ def rag_query(query: RAGQuery):
     **Example body:** {"question": "What was the market impact of Section 301 tariffs on EUR/USD?"}
     """
     try:
-        # Try to import the RAG chain (built in Phase 5)
         from core.rag_chain import get_rag_answer
         answer = get_rag_answer(query.question, top_k=query.top_k)
         return answer
     except ImportError:
-        # RAG not yet configured — return a helpful placeholder
         return {
             "question": query.question,
             "answer": (
