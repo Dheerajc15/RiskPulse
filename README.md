@@ -2,15 +2,11 @@
 
 A production-grade risk analytics system that combines quantitative finance (GARCH, VaR, Monte Carlo), distributed data processing (Dask), and AI-powered market intelligence (RAG, prompt engineering) through a FastAPI interface.
 
-Built as a demonstration of end-to-end financial engineering — from raw market data ingestion to real-time risk API endpoints.
-
 ---
 
 ## What This System Does
 
 RiskPulse ingests market data from Yahoo Finance and FRED, runs it through a cleaning and validation pipeline, computes institutional-grade risk metrics (VaR, CVaR, GARCH volatility, ADTV), and exposes everything through a REST API. A RAG pipeline adds natural language market intelligence over tariff policy documents and FRED releases.
-
-**Why it exists:** To demonstrate the exact skills required for quantitative technology roles at institutions like JPMC — OOP design, risk math, API development, and applied AI.
 
 ---
 
@@ -263,7 +259,6 @@ ADTV is the 20-day rolling mean of daily share volume. It is the primary liquidi
 
 - **Why 20 days?** ≈ 1 trading month. Smooths out single-day spikes while remaining responsive
 - **Liquidity flag:** If current ADTV falls below the 25th percentile of its own history, execution risk increases — larger orders will move the market
-- **JPMC context:** ADTV monitoring is automated across all covered instruments. A drop in ADTV triggers review of position sizing limits
 
 ### Monte Carlo Simulation
 
