@@ -11,6 +11,10 @@ import chromadb
 from chromadb.utils import embedding_functions
 from typing import List, Optional
 import logging
+import openai
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -51,7 +55,7 @@ def ingest_documents(documents_dir: str = DOCUMENTS_DIR) -> int:
         model_name=EMBEDDING_MODEL
     )
 
-    # Get or create collection (delete old one to re-ingest)
+    # Get or create collection
     try:
         client.delete_collection(name=COLLECTION_NAME)
     except Exception:
@@ -161,27 +165,21 @@ def get_rag_answer(question: str, top_k: int = 3) -> dict:
 
     prompt = build_rag_prompt(question, chunks)
 
-    # ---- Option A: Template-based answer (no LLM API needed) ----
-    # This extracts and presents the most relevant context directly
-    answer_parts = []
-    for i, chunk in enumerate(chunks):
-        answer_parts.append(f"[Source: {chunk['source']}] {chunk['text']}")
+    # ---- LLM-generated answer via OpenAI ----
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        raise ValueError(
+            "OPENAI_API_KEY not found. Set it in your .env file or environment."
+        )
 
-    answer = (
-        f"Based on {len(chunks)} retrieved document chunks:\n\n"
-        + "\n\n".join(answer_parts)
+    client = openai.OpenAI(api_key=api_key)
+    response = client.chat.completions.create(
+        model="gpt-4.1-mini",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.2,
+        max_tokens=500,
     )
-
-    # ---- Option B: OpenAI LLM (uncomment to use) ----
-    # import openai
-    # client = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-    # response = client.chat.completions.create(
-    #     model="gpt-4",
-    #     messages=[{"role": "user", "content": prompt}],
-    #     temperature=0.2,
-    #     max_tokens=500,
-    # )
-    # answer = response.choices[0].message.content
+    answer = response.choices[0].message.content
 
     return {
         "question": question,
