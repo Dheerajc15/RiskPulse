@@ -1,0 +1,347 @@
+{
+  "generated_at": "2026-04-26T00:07:39Z",
+  "document_count": 42,
+  "total_char_count": 2235664,
+  "date_range": {
+    "earliest": "2021-01-27",
+    "latest": "2026-03-18"
+  },
+  "documents": [
+    {
+      "meeting_date": "2021-01-27",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20210127.htm",
+      "text": null,
+      "char_count": 84514,
+      "fetched_at": "2026-04-26T00:06:42Z"
+    },
+    {
+      "meeting_date": "2021-03-17",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20210317.htm",
+      "text": null,
+      "char_count": 58262,
+      "fetched_at": "2026-04-26T00:06:43Z"
+    },
+    {
+      "meeting_date": "2021-04-28",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20210428.htm",
+      "text": null,
+      "char_count": 58893,
+      "fetched_at": "2026-04-26T00:06:44Z"
+    },
+    {
+      "meeting_date": "2021-06-16",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20210616.htm",
+      "text": null,
+      "char_count": 63718,
+      "fetched_at": "2026-04-26T00:06:46Z"
+    },
+    {
+      "meeting_date": "2021-07-28",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20210728.htm",
+      "text": null,
+      "char_count": 70415,
+      "fetched_at": "2026-04-26T00:06:47Z"
+    },
+    {
+      "meeting_date": "2021-09-22",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20210922.htm",
+      "text": null,
+      "char_count": 58510,
+      "fetched_at": "2026-04-26T00:06:48Z"
+    },
+    {
+      "meeting_date": "2021-11-03",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20211103.htm",
+      "text": null,
+      "char_count": 55721,
+      "fetched_at": "2026-04-26T00:06:50Z"
+    },
+    {
+      "meeting_date": "2021-12-15",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20211215.htm",
+      "text": null,
+      "char_count": 62857,
+      "fetched_at": "2026-04-26T00:06:51Z"
+    },
+    {
+      "meeting_date": "2022-01-26",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20220126.htm",
+      "text": null,
+      "char_count": 89853,
+      "fetched_at": "2026-04-26T00:06:52Z"
+    },
+    {
+      "meeting_date": "2022-03-16",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20220316.htm",
+      "text": null,
+      "char_count": 57813,
+      "fetched_at": "2026-04-26T00:06:54Z"
+    },
+    {
+      "meeting_date": "2022-05-04",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20220504.htm",
+      "text": null,
+      "char_count": 52470,
+      "fetched_at": "2026-04-26T00:06:55Z"
+    },
+    {
+      "meeting_date": "2022-06-15",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20220615.htm",
+      "text": null,
+      "char_count": 53119,
+      "fetched_at": "2026-04-26T00:06:57Z"
+    },
+    {
+      "meeting_date": "2022-07-27",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20220727.htm",
+      "text": null,
+      "char_count": 57098,
+      "fetched_at": "2026-04-26T00:06:58Z"
+    },
+    {
+      "meeting_date": "2022-09-21",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20220921.htm",
+      "text": null,
+      "char_count": 52254,
+      "fetched_at": "2026-04-26T00:06:59Z"
+    },
+    {
+      "meeting_date": "2022-11-02",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20221102.htm",
+      "text": null,
+      "char_count": 54206,
+      "fetched_at": "2026-04-26T00:07:01Z"
+    },
+    {
+      "meeting_date": "2022-12-14",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20221214.htm",
+      "text": null,
+      "char_count": 51959,
+      "fetched_at": "2026-04-26T00:07:02Z"
+    },
+    {
+      "meeting_date": "2023-02-01",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20230201.htm",
+      "text": null,
+      "char_count": 58367,
+      "fetched_at": "2026-04-26T00:07:03Z"
+    },
+    {
+      "meeting_date": "2023-03-22",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20230322.htm",
+      "text": null,
+      "char_count": 50207,
+      "fetched_at": "2026-04-26T00:07:05Z"
+    },
+    {
+      "meeting_date": "2023-05-03",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20230503.htm",
+      "text": null,
+      "char_count": 55047,
+      "fetched_at": "2026-04-26T00:07:06Z"
+    },
+    {
+      "meeting_date": "2023-06-14",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20230614.htm",
+      "text": null,
+      "char_count": 47225,
+      "fetched_at": "2026-04-26T00:07:08Z"
+    },
+    {
+      "meeting_date": "2023-07-26",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20230726.htm",
+      "text": null,
+      "char_count": 46352,
+      "fetched_at": "2026-04-26T00:07:09Z"
+    },
+    {
+      "meeting_date": "2023-09-20",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20230920.htm",
+      "text": null,
+      "char_count": 44012,
+      "fetched_at": "2026-04-26T00:07:10Z"
+    },
+    {
+      "meeting_date": "2023-11-01",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20231101.htm",
+      "text": null,
+      "char_count": 46583,
+      "fetched_at": "2026-04-26T00:07:12Z"
+    },
+    {
+      "meeting_date": "2023-12-13",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20231213.htm",
+      "text": null,
+      "char_count": 46083,
+      "fetched_at": "2026-04-26T00:07:13Z"
+    },
+    {
+      "meeting_date": "2024-01-31",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20240131.htm",
+      "text": null,
+      "char_count": 50468,
+      "fetched_at": "2026-04-26T00:07:14Z"
+    },
+    {
+      "meeting_date": "2024-03-20",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20240320.htm",
+      "text": null,
+      "char_count": 48944,
+      "fetched_at": "2026-04-26T00:07:16Z"
+    },
+    {
+      "meeting_date": "2024-05-01",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20240501.htm",
+      "text": null,
+      "char_count": 47954,
+      "fetched_at": "2026-04-26T00:07:17Z"
+    },
+    {
+      "meeting_date": "2024-06-12",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20240612.htm",
+      "text": null,
+      "char_count": 43969,
+      "fetched_at": "2026-04-26T00:07:18Z"
+    },
+    {
+      "meeting_date": "2024-07-31",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20240731.htm",
+      "text": null,
+      "char_count": 44946,
+      "fetched_at": "2026-04-26T00:07:20Z"
+    },
+    {
+      "meeting_date": "2024-09-18",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20240918.htm",
+      "text": null,
+      "char_count": 44480,
+      "fetched_at": "2026-04-26T00:07:21Z"
+    },
+    {
+      "meeting_date": "2024-11-07",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20241107.htm",
+      "text": null,
+      "char_count": 49299,
+      "fetched_at": "2026-04-26T00:07:23Z"
+    },
+    {
+      "meeting_date": "2024-12-18",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20241218.htm",
+      "text": null,
+      "char_count": 46022,
+      "fetched_at": "2026-04-26T00:07:24Z"
+    },
+    {
+      "meeting_date": "2025-01-29",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20250129.htm",
+      "text": null,
+      "char_count": 54987,
+      "fetched_at": "2026-04-26T00:07:25Z"
+    },
+    {
+      "meeting_date": "2025-03-19",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20250319.htm",
+      "text": null,
+      "char_count": 48761,
+      "fetched_at": "2026-04-26T00:07:27Z"
+    },
+    {
+      "meeting_date": "2025-05-07",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20250507.htm",
+      "text": null,
+      "char_count": 51071,
+      "fetched_at": "2026-04-26T00:07:28Z"
+    },
+    {
+      "meeting_date": "2025-06-18",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20250618.htm",
+      "text": null,
+      "char_count": 47360,
+      "fetched_at": "2026-04-26T00:07:30Z"
+    },
+    {
+      "meeting_date": "2025-07-30",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20250730.htm",
+      "text": null,
+      "char_count": 47542,
+      "fetched_at": "2026-04-26T00:07:31Z"
+    },
+    {
+      "meeting_date": "2025-09-17",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20250917.htm",
+      "text": null,
+      "char_count": 42246,
+      "fetched_at": "2026-04-26T00:07:32Z"
+    },
+    {
+      "meeting_date": "2025-10-29",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20251029.htm",
+      "text": null,
+      "char_count": 55876,
+      "fetched_at": "2026-04-26T00:07:34Z"
+    },
+    {
+      "meeting_date": "2025-12-10",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20251210.htm",
+      "text": null,
+      "char_count": 51213,
+      "fetched_at": "2026-04-26T00:07:35Z"
+    },
+    {
+      "meeting_date": "2026-01-28",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm",
+      "text": null,
+      "char_count": 44491,
+      "fetched_at": "2026-04-26T00:07:36Z"
+    },
+    {
+      "meeting_date": "2026-03-18",
+      "document_type": "minutes",
+      "source_url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20260318.htm",
+      "text": null,
+      "char_count": 40497,
+      "fetched_at": "2026-04-26T00:07:38Z"
+    }
+  ]
+}

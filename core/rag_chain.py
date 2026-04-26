@@ -20,7 +20,8 @@ logger = logging.getLogger(__name__)
 
 # ---- Configuration ----
 CHROMA_PERSIST_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "chroma_db")
-DOCUMENTS_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "documents")
+DOCUMENTS_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "documents", "fomc")
+MANIFEST_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "documents", "corpus_manifest.json")
 COLLECTION_NAME = "riskpulse_docs"
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 CHUNK_SIZE = 500  # characters per chunk
@@ -42,20 +43,19 @@ def chunk_text(text: str, chunk_size: int = CHUNK_SIZE, overlap: int = CHUNK_OVE
 
 def ingest_documents(documents_dir: str = DOCUMENTS_DIR) -> int:
     """
-    Read all .txt files from documents_dir, chunk them,
-    embed with sentence-transformers, and store in ChromaDB.
-    
+    Read all .txt files from documents_dir, chunk them, embed with
+    sentence-transformers, and store in ChromaDB with enriched metadata
+    sourced from corpus_manifest.json.
+
     Returns the number of chunks stored.
     """
-    # Initialize ChromaDB with persistence
-    client = chromadb.PersistentClient(path=CHROMA_PERSIST_DIR)
+    import json as _json
 
-    # Use sentence-transformers for embedding
+    client = chromadb.PersistentClient(path=CHROMA_PERSIST_DIR)
     ef = embedding_functions.SentenceTransformerEmbeddingFunction(
         model_name=EMBEDDING_MODEL
     )
 
-    # Get or create collection
     try:
         client.delete_collection(name=COLLECTION_NAME)
     except Exception:
@@ -66,35 +66,60 @@ def ingest_documents(documents_dir: str = DOCUMENTS_DIR) -> int:
         embedding_function=ef,
     )
 
-    # Read and chunk all documents
-    all_chunks = []
-    all_metadatas = []
-    all_ids = []
+    manifest_lookup = {}
+    if os.path.exists(MANIFEST_PATH):
+        with open(MANIFEST_PATH, "r", encoding="utf-8") as f:
+            manifest = _json.load(f)
+        for entry in manifest.get("documents", []):
+            filename = f"{entry['meeting_date']}_minutes.txt"
+            manifest_lookup[filename] = entry
 
-    txt_files = glob.glob(os.path.join(documents_dir, "*.txt"))
+    txt_files = sorted(glob.glob(os.path.join(documents_dir, "*.txt")))
     if not txt_files:
         logger.warning(f"No .txt files found in {documents_dir}")
         return 0
+
+    all_chunks, all_metadatas, all_ids = [], [], []
+    rejected_short = 0
 
     for filepath in txt_files:
         filename = os.path.basename(filepath)
         with open(filepath, "r", encoding="utf-8") as f:
             text = f.read()
 
+        manifest_entry = manifest_lookup.get(filename, {})
+        meeting_date = manifest_entry.get("meeting_date", "unknown")
+        source_url = manifest_entry.get("source_url", "")
+        document_type = manifest_entry.get("document_type", "minutes")
+
         chunks = chunk_text(text)
         for i, chunk in enumerate(chunks):
+            if len(chunk) < 100:
+                rejected_short += 1
+                continue
             all_chunks.append(chunk)
-            all_metadatas.append({"source": filename, "chunk_index": i})
+            all_metadatas.append({
+                "source": filename,
+                "chunk_index": i,
+                "meeting_date": meeting_date,
+                "document_type": document_type,
+                "source_url": source_url,
+            })
             all_ids.append(f"{filename}_{i}")
 
-    # Add to ChromaDB
-    collection.add(
-        documents=all_chunks,
-        metadatas=all_metadatas,
-        ids=all_ids,
-    )
+    BATCH_SIZE = 5000
+    for start in range(0, len(all_chunks), BATCH_SIZE):
+        end = start + BATCH_SIZE
+        collection.add(
+            documents=all_chunks[start:end],
+            metadatas=all_metadatas[start:end],
+            ids=all_ids[start:end],
+        )
 
-    logger.info(f"Ingested {len(all_chunks)} chunks from {len(txt_files)} documents")
+    logger.info(
+        f"Ingested {len(all_chunks)} chunks from {len(txt_files)} documents "
+        f"(rejected {rejected_short} chunks under 100 chars)"
+    )
     return len(all_chunks)
 
 
@@ -118,10 +143,13 @@ def retrieve_chunks(query: str, top_k: int = 3) -> List[dict]:
 
     chunks = []
     for i in range(len(results["documents"][0])):
+        meta = results["metadatas"][0][i]
         chunks.append({
             "text": results["documents"][0][i],
-            "source": results["metadatas"][0][i]["source"],
-            "distance": round(results["distances"][0][i], 4),
+            "source": meta["source"],
+            "meeting_date": meta.get("meeting_date", "unknown"),
+            "source_url": meta.get("source_url", ""),
+            "distance": round(results["distances"][0][i], 4)
         })
 
     return chunks
